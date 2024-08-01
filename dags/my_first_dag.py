@@ -10,7 +10,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="my_first_dag",
+    dag_id="my_first_dag_v02",
     default_args=default_args,
     description="This is my sample DAG",
     start_date=datetime(2024, 7, 31, 2),
