@@ -28,7 +28,7 @@ docker compose up airflow-init
 # Run Airflow (use -d to run containers in background)
 docker compose up -d
 
-# Check which containers are runningdocker compose up -d
+# Check which containers are running
 docker ps
 
 # Now docker will run on http://localhost:8080/
@@ -53,7 +53,7 @@ docker-compose down -v
 # create a new postgres connection (username and password is "airflow')
 
 # In the Airflow UI, go to admin -> connections -> create a new connection (for postgres)
-# In host: host.docker.internal (for windows or mac, when using postgres from docker)
+# In host: host.docker.local (for windows or mac, when using postgres from docker)
 
 # Instructions to run airflow in windows using python (currently there are issues with airflow compatibility in windows - so not working)
 
