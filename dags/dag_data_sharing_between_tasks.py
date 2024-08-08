@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 
 
 default_args = {
-    'owner': 'coder2j',
+    'owner': 'Lokesh',
     'retries': 5,
     'retry_delay': timedelta(minutes=5)
 }
