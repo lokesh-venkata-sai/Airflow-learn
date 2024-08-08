@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from airflow import DAG
-from airflow.providers.postgres.operators.postgres import PostgresOperator
+from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 
 default_args = {
     'owner': 'Lokesh',
@@ -16,9 +16,9 @@ with DAG(
     start_date=datetime(2024, 7, 8),
     schedule_interval='0 0 * * *'
 ) as dag:
-    task1 = PostgresOperator(
+    task1 = SQLExecuteQueryOperator(
         task_id = "create_postgres_database",
-        postgres_conn_id = 'postgres_localhost',
+        conn_id = 'postgres_localhost',
         sql = """
                 create table if not exists dag_runs (
                     dt date,
@@ -28,17 +28,17 @@ with DAG(
               """
     )
 
-    task2 = PostgresOperator(
+    task2 = SQLExecuteQueryOperator(
         task_id='insert_into_table',
-        postgres_conn_id='postgres_localhost',
+        conn_id='postgres_localhost',
         sql="""
             insert into dag_runs (dt, dag_id) values ('{{ ds }}', '{{ dag.dag_id }}')
         """
     )
 
-    task3 = PostgresOperator(
+    task3 = SQLExecuteQueryOperator(
         task_id='delete_data_from_table',
-        postgres_conn_id='postgres_localhost',
+        conn_id='postgres_localhost',
         sql="""
             delete from dag_runs where dt = '{{ ds }}' and dag_id = '{{ dag.dag_id }}';
         """
